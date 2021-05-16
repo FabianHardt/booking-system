@@ -175,6 +175,7 @@ CREATE TABLE IF NOT EXISTS `bs_squares` (
   `min_range_book` int(10) unsigned DEFAULT 0,
   `range_book` int(10) unsigned DEFAULT NULL,
   `max_active_bookings` int(10) unsigned DEFAULT 0,
+  `max_active_bookings_day` int(10) unsigned DEFAULT 0,
   `range_cancel` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
