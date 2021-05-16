@@ -69,7 +69,7 @@ class SquareManager extends AbstractManager
             }
 
             if ($referenceSquare->get('max_active_bookings_day') === null) {
-                $this->squareTable->getAdapter()->query('ALTER TABLE `bs_squares` ADD `max_active_bookings_day` INT UNSIGNED NOT NULL DEFAULT \'0\' AFTER `range_book`;', 'execute');
+                $this->squareTable->getAdapter()->query('ALTER TABLE `bs_squares` ADD `max_active_bookings_day` INT UNSIGNED NOT NULL DEFAULT \'0\' AFTER `max_active_bookings`;', 'execute');
                 $loadSquares();
             }
         }
