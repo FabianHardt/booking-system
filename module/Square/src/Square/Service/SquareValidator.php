@@ -136,10 +136,13 @@ class SquareValidator extends AbstractService
             }
         }
 
+        // Fix: No hard exception, just stop code execution
         if ($square->get('range_book')) {
             if ($timeStart > $dateMax) {
                 if (! ($this->user && $this->user->can('calendar.create-single-bookings, calendar.create-subscription-bookings'))) {
-                    throw new RuntimeException('The passed date is still too far away');
+                    echo 'Sie dürfen nur bis ' . $dateMax->format('d-m-Y H:i') . ' buchen.';
+                    exit;
+                    //throw new RuntimeException('The passed date is still too far away');
                 }
             }
         }
