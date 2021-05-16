@@ -260,6 +260,20 @@ class EditForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'cf-max-active-bookings-day',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'cf-max-active-bookings-day',
+                'style' => 'width: 80px;',
+            ),
+            'options' => array(
+                'label' => 'Buchungen pro Tag einschränken',
+                'notes' => 'Auf 0 setzen, um beliebig viele Buchungen zu erlauben',
+                'postfix' => 'gleichzeitige Buchung(en) pro Benutzer und Tag',
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'cf-range-cancel',
             'type' => 'Text',
             'attributes' => array(
