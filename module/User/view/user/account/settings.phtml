@@ -75,14 +75,14 @@ $this->headScript()->appendFile($this->basePath('js/controller/user/settings.min
 
     <div class="separator-small"></div>
 
-    <div class="sandbox">
+    <!--div class="sandbox">
         <div class="symbolic symbolic-phone">
-            <div class="edit-label dark-gray"><?= $this->t('Update phone number') ?></div>
+            <div class="edit-label dark-gray"><!--?= $this->t('Update phone number') ?--><!--/div>
 
             <div class="edit-panel">
-                <div class="separator-small"></div>
+                <div class="separator-small"></div-->
 
-                <?php
+                <!--?php
 
                 $form = $this->editPhoneForm;
                 $form->setAttribute('method', 'post');
@@ -91,27 +91,27 @@ $this->headScript()->appendFile($this->basePath('js/controller/user/settings.min
 
                 echo $this->form()->openTag($form);
 
-                ?>
+                ?-->
 
-                <table class="default-table" style="margin: 0px;">
+                <!--table class="default-table" style="margin: 0px;">
                     <tr>
-                        <td>
-                            <?= $this->formElement($form->get('epf-phone')) ?>
-                            <?= $this->formElementErrors($form->get('epf-phone')) ?>
-                            <?= $this->formElementNotes($form->get('epf-phone')) ?>
-                        </td>
-                        <td>
-                            <?= $this->formElement($form->get('epf-submit')) ?>
-                        </td>
+                        <td-->
+                            <!--?= $this->formElement($form->get('epf-phone')) ?-->
+                            <!--?= $this->formElementErrors($form->get('epf-phone')) ?-->
+                            <!--?= $this->formElementNotes($form->get('epf-phone')) ?-->
+                        <!--/td>
+                        <td-->
+                            <!--?= $this->formElement($form->get('epf-submit')) ?-->
+                        <!--/td>
                     </tr>
-                </table>
+                </table-->
 
-                <?= $this->form()->closeTag() ?>
-            </div>
+                <!--?= $this->form()->closeTag() ?-->
+            <!--/div>
         </div>
-    </div>
+    </div-->
 
-    <div class="separator-small"></div>
+    <!--div class="separator-small"></div-->
 
     <div class="sandbox">
         <div class="symbolic symbolic-email">
