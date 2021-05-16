@@ -325,7 +325,6 @@ class SquareValidator extends AbstractService
                             $today = new DateTime();
 
                             if ($activeReservationDate->format('d-m-Y') == $dateStart->format('d-m-Y')) {
-                                echo 'YOU';
                                 $activeBookingsCount++;
                             }
                         }
@@ -338,7 +337,7 @@ class SquareValidator extends AbstractService
                 }
             }
 
-            /* Check for maximum active bookings limitation */
+        /* Check for maximum active bookings limitation */
         if ($user) {
             $maxActiveBookings = $square->need('max_active_bookings');
 
