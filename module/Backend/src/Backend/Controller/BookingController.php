@@ -33,7 +33,7 @@ class BookingController extends AbstractActionController
 
         if ($dateEnd) {
             $dateEnd = new \DateTime($dateEnd);
-            $dateEnd->modify('+1 day')->modify('-1 second');
+            $dateEnd->setTime(23, 59, 59);
         }
 
         if (($dateStart && $dateEnd) || $search) {
