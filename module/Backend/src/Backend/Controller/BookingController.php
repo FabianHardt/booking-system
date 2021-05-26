@@ -47,10 +47,12 @@ class BookingController extends AbstractActionController
                     $bookings = $bookingManager->getByReservations($reservations, $filters['filters']);
                 } else {
                     $bookings = $bookingManager->getBy($filters['filters'], null, $limit);
+                }
+
+                if($search){
                     $bookings = $this->complexFilterBookings($bookings, $filters);
                     $reservations = $reservationManager->getByBookings($bookings);
                 }
-
 
                 $userManager->getByBookings($bookings);
             } catch (\RuntimeException $e) {
