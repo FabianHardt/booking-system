@@ -14,6 +14,16 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'mobile' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/mobile',
+                            'defaults' => array(
+                                'controller' => 'Backend\Controller\Mobile',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
                     'user' => array(
                         'type' => 'Literal',
                         'options' => array(
@@ -389,6 +399,7 @@ return array(
             'Backend\Controller\Event' => 'Backend\Controller\EventController',
             'Backend\Controller\Config' => 'Backend\Controller\ConfigController',
             'Backend\Controller\ConfigSquare' => 'Backend\Controller\ConfigSquareController',
+            'Backend\Controller\Mobile' => 'Backend\Controller\MobileController',
         ),
     ),
 

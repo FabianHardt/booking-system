@@ -72,6 +72,7 @@ return array(
     'Welcome, %s' => 'Willkommen, %s',
 
     'User' => 'Benutzer',
+    'Menu' => 'Menü',
 
     'Placeholder' => 'Platzhalter',
     'Deleted user' => 'Gelöschter Benutzer',
