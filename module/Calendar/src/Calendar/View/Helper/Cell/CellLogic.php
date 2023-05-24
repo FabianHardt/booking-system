@@ -54,6 +54,9 @@ class CellLogic extends AbstractHelper
         }
 
         $bookingRange = $square->get('range_book');
+        $reservationsForCell = $view->calendarReservationsForCell($reservationsForCol, $square);
+        $eventsForCell = $view->calendarEventsForCell($eventsForCol, $square);
+        $timeBlockSplit = round($timeBlock / 2);
 
         if ($bookingRange) {
             $bookingRangeDate = $square->getExtra('range_book_date');
@@ -62,6 +65,18 @@ class CellLogic extends AbstractHelper
                 $bookingRangeDate = clone $now;
                 $bookingRangeDate->modify('+' . $bookingRange . ' seconds');
                 $square->setExtra('range_book_date', $bookingRangeDate);
+            }
+
+            foreach ($reservationsForCell as $rid => $reservation) {
+                if ($walkingDate > $bookingRangeDate) {
+                    if (! ($user && $user->can('calendar.see-past'))) {
+                        $booking = $reservation->needExtra('booking');
+                        $bookingStatus = $booking->need('status');
+                        if ($bookingStatus == 'subscription') {
+                            return $view->calendarCellRenderCell($walkingDate, $walkingTime, $timeBlock, $square, $user, $reservationsForCell, $eventsForCell);
+                        }
+                    }
+                }
             }
 
             if ($walkingDate > $bookingRangeDate) {
@@ -74,11 +89,6 @@ class CellLogic extends AbstractHelper
         if ($walkingTime < $square->needExtra('time_start_sec') || $walkingTime >= $square->needExtra('time_end_sec')) {
             return $view->calendarCell($this->view->t('Closed'), 'cc-over');
         }
-
-        $reservationsForCell = $view->calendarReservationsForCell($reservationsForCol, $square);
-        $eventsForCell = $view->calendarEventsForCell($eventsForCol, $square);
-
-        $timeBlockSplit = round($timeBlock / 2);
 
         if ($timeBlockSplit >= $square->need('time_block_bookable') || $eventsForCell) {
 

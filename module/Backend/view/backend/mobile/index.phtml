@@ -1,0 +1,39 @@
+<?php
+
+$this->setup([
+    'title' => 'Menu',
+    'panel' => 'centered-panel',
+    'back' => true,
+]);
+
+?>
+
+<div>
+    <h1 class="no-ajax"><?= $this->t('Menu'); ?></h1>
+
+    <div class="no-ajax separator-small"></div>
+
+    <div style="margin-bottom: 8px;">
+        <a href="<?= $this->url('user/bookings'); ?>" class="default-button" style="width: 150px; text-align: left;">
+            <span class="symbolic symbolic-booking">
+                <?= $this->t('My bookings'); ?>
+            </span>
+        </a>
+    </div>
+
+    <div style="margin-bottom: 8px;">
+        <a href="<?= $this->url('user/settings'); ?>" class="default-button" style="width: 150px; text-align: left;">
+            <span class="symbolic symbolic-user">
+                <?= $this->t('My account'); ?>
+            </span>
+        </a>
+    </div>
+
+    <div style="margin-bottom: 8px;">
+        <a href="<?= $this->url('user/logout'); ?>" class="default-button" style="width: 150px; text-align: left;">
+            <span class="symbolic symbolic-off">
+                <?= $this->t('Logout'); ?>
+            </span>
+        </a>
+    </div>
+</div>

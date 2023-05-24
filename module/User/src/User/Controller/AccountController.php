@@ -165,18 +165,18 @@ class AccountController extends AbstractActionController
                     $alias = $meta['name'];
                 }
 
-                $meta['street'] = $registrationData['rf-street'] . ' ' . $registrationData['rf-number'];
-                $meta['zip'] = $registrationData['rf-zip'];
-                $meta['city'] = $registrationData['rf-city'];
-                $meta['phone'] = $registrationData['rf-phone'];
+                // $meta['street'] = $registrationData['rf-street'] . ' ' . $registrationData['rf-number'];
+                // $meta['zip'] = $registrationData['rf-zip'];
+                // $meta['city'] = $registrationData['rf-city'];
+                // $meta['phone'] = $registrationData['rf-phone'];
 
-                if (! (isset($registrationData['rf-birthdate']) && preg_match('/^([ \,\-\.0-9\x{00c0}-\x{01ff}a-zA-Z]){4,}$/u', $registrationData['rf-birthdate']))) {
-                    $registrationData['rf-birthdate'] = null;
-                }
+                // if (! (isset($registrationData['rf-birthdate']) && preg_match('/^([ \,\-\.0-9\x{00c0}-\x{01ff}a-zA-Z]){4,}$/u', $registrationData['rf-birthdate']))) {
+                //     $registrationData['rf-birthdate'] = null;
+                // }
 
-                if (isset($registrationData['rf-birthdate']) && $registrationData['rf-birthdate']) {
-                    $meta['birthdate'] = $registrationData['rf-birthdate'];
-                }
+                // if (isset($registrationData['rf-birthdate']) && $registrationData['rf-birthdate']) {
+                //     $meta['birthdate'] = $registrationData['rf-birthdate'];
+                // }
 
                 $meta['locale'] = $this->config('i18n.locale');
 
@@ -265,6 +265,37 @@ class AccountController extends AbstractActionController
         $user->set('last_ip', $_SERVER['REMOTE_ADDR']);
 
         $userManager->save($user);
+    }
+
+    public function manualActivationAction()
+    {
+        $serviceManager = @$this->getServiceLocator();
+        $activationUid = $this->params()->fromQuery('id');
+
+        if (! (is_numeric($activationUid) && $activationUid > 0)) {
+            throw new RuntimeException('Invalid user ID.');
+        }
+
+        $userManager = @$this->getServiceLocator()->get('User\Manager\UserManager');
+        $user = $userManager->get($activationUid, false);
+
+        if (! $user) {
+            throw new RuntimeException('No user found.');
+        }
+
+        $user->set('status', $user->getMeta('status_before_reactivation', 'enabled'));
+        $user->set('last_activity', date('Y-m-d H:i:s'));
+        $user->set('last_ip', $_SERVER['REMOTE_ADDR']);
+
+        $userManager->save($user);
+
+        $subject = sprintf($this->t('Your registration to the %s %s'),
+        $this->option('client.name.short', false), $this->option('service.name.full', false));
+
+        $text = sprintf($this->t('Your account %s (e-mail: %s) has been activated by an administrator!'), $user->need('alias'), $user->need('email'));
+
+        $userMailService = $serviceManager->get('User\Service\MailService');
+        $userMailService->send($user, $subject, $text);
     }
 
     public function activationResendAction()

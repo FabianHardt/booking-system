@@ -108,7 +108,7 @@ class IndexController extends AbstractActionController
                 $optionManager->set('service.user.activation', 'email');
                 $optionManager->set('service.calendar.days', '4');
                 $optionManager->set('service.website', $base);
-                $optionManager->set('service.branding', 'true');
+                $optionManager->set('service.branding', 'false');
                 $optionManager->set('service.branding.name', $this->t('ep-3 Bookingsystem'));
                 $optionManager->set('service.branding.website', 'http://bs.hbsys.de/');
 
@@ -132,6 +132,7 @@ class IndexController extends AbstractActionController
                         'min_range_book' => 0,
                         'range_book' => 4838400,
                         'max_active_bookings' => 0,
+                        'max_active_bookings_day' => 0,
                         'range_cancel' => 86400,
                     ));
 

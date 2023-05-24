@@ -33,6 +33,7 @@ class BookingController extends AbstractActionController
 
         if ($dateEnd) {
             $dateEnd = new \DateTime($dateEnd);
+            $dateEnd->setTime(23, 59, 59);
         }
 
         if (($dateStart && $dateEnd) || $search) {
@@ -48,8 +49,10 @@ class BookingController extends AbstractActionController
                     $bookings = $bookingManager->getBy($filters['filters'], null, $limit);
                 }
 
-                $bookings = $this->complexFilterBookings($bookings, $filters);
-                $reservations = $reservationManager->getByBookings($bookings);
+                if($search){
+                    $bookings = $this->complexFilterBookings($bookings, $filters);
+                    $reservations = $reservationManager->getByBookings($bookings);
+                }
 
                 $userManager->getByBookings($bookings);
             } catch (\RuntimeException $e) {

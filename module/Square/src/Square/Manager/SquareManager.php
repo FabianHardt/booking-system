@@ -67,6 +67,11 @@ class SquareManager extends AbstractManager
                 $this->squareTable->getAdapter()->query('ALTER TABLE `bs_squares` ADD `max_active_bookings` INT UNSIGNED NOT NULL DEFAULT \'0\' AFTER `range_book`;', 'execute');
                 $loadSquares();
             }
+
+            if ($referenceSquare->get('max_active_bookings_day') === null) {
+                $this->squareTable->getAdapter()->query('ALTER TABLE `bs_squares` ADD `max_active_bookings_day` INT UNSIGNED NOT NULL DEFAULT \'0\' AFTER `max_active_bookings`;', 'execute');
+                $loadSquares();
+            }
         }
 
         /* Load square meta data */
@@ -204,6 +209,7 @@ class SquareManager extends AbstractManager
                     'min_range_book' => $square->get('min_range_book'),
                     'range_book' => $square->need('range_book'),
                     'max_active_bookings' => $square->get('max_active_bookings'),
+                    'max_active_bookings_day' => $square->get('max_active_bookings_day'),
                     'range_cancel' => $square->need('range_cancel'),
                 ));
 

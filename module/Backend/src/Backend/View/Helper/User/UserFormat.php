@@ -65,12 +65,17 @@ class UserFormat extends AbstractHelper
 
         /* Actions col */
 
-        $html .= sprintf('<td class="actions-col no-print"><a href="%s" class="unlined gray symbolic symbolic-edit">%s</a> &nbsp; <a href="%s" class="unlined gray symbolic symbolic-booking">%s</a></td>',
+        $html .= sprintf('<td style="line-height: 2.0; width: 100px;" class="actions-col no-print"><a href="%s" class="unlined gray symbolic symbolic-edit">%s</a> &nbsp; <a href="%s" class="unlined gray symbolic symbolic-booking">%s</a></td>',
             $view->url('backend/user/edit', ['uid' => $user->need('uid')], ['query' => ['search' => $search]]),
             $view->t('Edit'),
             $view->url('backend/booking', [], ['query' => ['search' => '(uid = ' . $user->need('uid') . ')']]),
             $view->t('Bookings'));
 
+            $html .= sprintf('<td style="line-height: 2.0; width: 150px;" class="actions-col no-print"><a href="%s" class="unlined gray symbolic symbolic-user">%s</a> &nbsp; <a href="%s" class="unlined gray symbolic symbolic-cross">%s</a></td>',
+               $view->url('user/manual-activation', [], ['query' => ['id' => $user->need('uid')]]),
+               $view->t('Activate user'),
+               $view->url('backend/user/delete', ['uid' => $user->need('uid')], ['query' => ['search' => $search]]),
+               $view->t('Delete user'));
         $html .= '</tr>';
 
         return $html;

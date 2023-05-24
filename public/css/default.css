@@ -771,6 +771,11 @@ option { padding-right: 16px; }
     #label { background: transparent !important; }
 }
 
+@media screen and (min-width: 1024px)
+{
+    .responsive-min-1024 { display: none; }
+}
+
 /* Print */
 
 @media print

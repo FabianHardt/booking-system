@@ -14,6 +14,7 @@ return array(
 
     'Statistic' => 'Statistik',
     'User-Statistic' => 'Benutzer-Statistik',
+    'User activation' => 'Benutzer aktivieren',
     'Booking-Statistic' => 'Buchungs-Statistik',
     'Event-Statistic' => 'Veranstaltungs-Statistik',
 
@@ -36,8 +37,10 @@ return array(
 
     'Name or number' => 'Name oder Nummer',
     'Search' => 'Suche',
+    'Users to activate' => 'Zu aktivierende Benutzer',
     'Advanced search' => 'Erweiterte Suche',
     '%sNo users found%s for this search' => '%sKeine Benutzer%s für diese Suche gefunden',
+    '%sNo users to activate found%s' => '%sKeine Benutzer%s zur Aktivierung gefunden',
     '%sNo bookings found%s for this search' => '%sKeine Buchungen%s für diese Suche gefunden',
     '%sNo events found%s for this search' => '%sKeine Veranstaltungen%s für diese Suche gefunden',
 
@@ -61,6 +64,7 @@ return array(
     'Delete' => 'Löschen',
 
     'Edit user' => 'Benutzer bearbeiten',
+    'Activate user' => 'Benutzer aktivieren',
 
     'No.' => 'Nr.',
     'Notes' => 'Notizen',
