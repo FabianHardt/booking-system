@@ -1,0 +1,32 @@
+version: '3'
+services:
+    web:
+        image: nginx:latest
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+            - .:/app
+        links:
+            - php
+    php:
+        build:
+            context: .
+            dockerfile: PHP.Dockerfile
+        volumes:
+            - .:/app
+        links:
+            - mysql
+    mysql:
+        image: mariadb:latest
+        environment:
+            MYSQL_ROOT_PASSWORD: 'supersecret'
+            MYSQL_USER: 'booking'
+            MYSQL_PASSWORD: 'secret123'
+            MYSQL_DATABASE: 'bookingdb'
+        volumes:
+            - mysqldata:/var/lib/mysql
+        ports:
+            - 3306:3306
+volumes:
+    mysqldata: {}
